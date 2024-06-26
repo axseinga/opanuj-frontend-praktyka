@@ -31,7 +31,9 @@ const App = () => {
         <div className="grid grid-cols-2 gap-x-4">
           <Input
             value={inputOne}
-            handleOnchange={(e) => setInputOne(parseFloat(e.target.value))}
+            handleOnchange={(e) => {
+              setInputOne(parseFloat(e.target.value));
+            }}
           />
           <Input
             value={inputTwo}
@@ -43,6 +45,7 @@ const App = () => {
             <Button
               key={`Button_${mathOp.symbol}_${index}`}
               handleClick={() => handleSubmit(mathOp.operation)}
+              disabled={isNaN(Number(inputOne)) || isNaN(Number(inputTwo))}
             >
               {mathOp.symbol}
             </Button>
