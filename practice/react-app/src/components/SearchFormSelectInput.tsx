@@ -19,7 +19,7 @@ export const SearchFormSelectInput = ({
         onChange={(e) => handleChange(e.target.value)}
         className="border h-7 mt-1"
       >
-        {options && options.map((option) => <option value={option.value}>{option.label}</option>)}
+        {options && options.map((option) => <option key={option.label} value={option.value}>{option.label}</option>)}
       </select>
     </label>
   );

@@ -12,20 +12,19 @@ function CharacterSearchContainer() {
   const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
-    if (name || gender) {
-      const characters = fetchCharacters(name, gender);
-      setCharacters(characters);
-    }
+    const fetchData = async () => {
+      if (name || gender) {
+        const characters = await fetchCharacters(name, gender);
+        setCharacters(characters);
+      }
+    };
+
+    fetchData();
   }, [name, gender]);
 
-  const sortedCharacters = [...characters].sort((a, b) => {
-    if (sortOption === 'name') {
-      return a.name.localeCompare(b.name);
-    } else if (sortOption === 'created') {
-      return new Date(a.created).getTime() - new Date(b.created).getTime();
-    }
-    return 0;
-  });
+  useEffect(() => {
+    setCharacters(characters);
+  }, [sortOption, characters]);
 
   return (
     <>
@@ -41,7 +40,7 @@ function CharacterSearchContainer() {
         setSortOption={setSortOption}
       />
       <div className="pt-12" />
-      <CharacterList characters={sortedCharacters} />
+      <CharacterList characters={characters} />
       <div className="pt-16" />
     </>
   );
