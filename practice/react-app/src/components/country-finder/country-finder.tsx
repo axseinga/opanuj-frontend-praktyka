@@ -2,17 +2,19 @@ import React from 'react';
 import { SearchBarIcon } from '../icons/search-bar';
 import './country-finder.scss';
 import { fetchCountriesByName } from '../../services/countriesAPI';
-import { searchResultsT } from '../../types';
+import { CountryFetchItemT } from '../../types';
 import { sortCountriesFn } from '../../utils';
 import { CountryCard } from '../country-card/country-card';
 
 export const CountryFinder = () => {
   const [searchValue, setSearchValue] = React.useState('');
-  const [searchResult, setSearchResult] = React.useState<searchResultsT[]>([]);
+  const [searchResult, setSearchResult] = React.useState<CountryFetchItemT[]>(
+    []
+  );
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
 
-  const handleSort = (array: searchResultsT[], order: string) => {
+  const handleSort = (array: CountryFetchItemT[], order: string) => {
     if (searchResult.length === 0) return;
     const sortedArray = sortCountriesFn(array, order);
     const newResult = [...sortedArray];

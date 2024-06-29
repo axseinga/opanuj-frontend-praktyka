@@ -1,0 +1,79 @@
+.country-game {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 2rem;
+
+  & > button {
+    border-radius: 10px;
+    background-color: limegreen;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms ease-in, box-shadow 200ms ease-in;
+
+    &:hover {
+      background-color: rgb(1, 140, 1);
+      box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  > p {
+    height: 5px;
+  }
+
+  & > div {
+    min-width: 200px;
+  }
+
+  & form {
+    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 1.5rem;
+    color: black;
+    border: 1px solid #d4d4d4;
+
+    > input {
+      width: 100%;
+      padding: 6px;
+      border: none;
+      font-size: 17px;
+    }
+
+    > button {
+      width: 100%;
+      background-color: #ddd;
+      font-size: 17px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 200ms ease-in;
+
+      &:hover {
+        background-color: limegreen;
+      }
+
+      &:disabled {
+        pointer-events: none;
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      > p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+    }
+  }
+}

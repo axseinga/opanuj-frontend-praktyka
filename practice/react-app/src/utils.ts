@@ -1,6 +1,6 @@
-import { searchResultsT } from './types';
+import { CountryFetchItemT } from './types';
 
-export const sortCountriesFn = (array: searchResultsT[], order: string) => {
+export const sortCountriesFn = (array: CountryFetchItemT[], order: string) => {
   return array.sort((a, b) => {
     let factorA;
     let factorB;
@@ -19,4 +19,8 @@ export const sortCountriesFn = (array: searchResultsT[], order: string) => {
     if (factorA > factorB) return order === sortOption ? 1 : -1;
     return 0;
   });
+};
+
+export const getRandomNumberFromRange = (min: number, max: number) => {
+  return Math.floor(min + Math.random() * (max - min));
 };
