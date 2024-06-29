@@ -3,6 +3,7 @@ import CharacterList from '../components/CharacterList';
 import SearchForm from '../components/SearchForm';
 import SearchTitle from '../components/SearchTitle';
 import { Character } from '../types/Character';
+import { fetchCharacters } from '../services/fetchCharacters';
 
 function CharacterSearchContainer() {
   const [name, setName] = useState('');
@@ -12,12 +13,8 @@ function CharacterSearchContainer() {
 
   useEffect(() => {
     if (name || gender) {
-      fetch(
-        `https://rickandmortyapi.com/api/character/?name=${name}&gender=${gender}`
-      )
-        .then((response) => response.json())
-        .then((data) => setCharacters(data.results || []))
-        .catch((error) => console.error('Error fetching data:', error));
+      const characters = fetchCharacters(name, gender);
+      setCharacters(characters);
     }
   }, [name, gender]);
 
@@ -33,7 +30,7 @@ function CharacterSearchContainer() {
   return (
     <>
       <div className="pt-20" />
-      <SearchTitle />
+      <SearchTitle title="Wyszukiwarka postaci Rick and Morty" />
       <div className="pt-8" />
       <SearchForm
         name={name}

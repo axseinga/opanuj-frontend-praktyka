@@ -1,3 +1,6 @@
+import { SearchFormSelectInput } from './SearchFormSelectInput';
+import { SearchFormTextInput } from './SearchFormTextInput';
+
 type SearchFormProps = {
   name: string;
   setName: (name: string) => void;
@@ -17,42 +20,34 @@ function SearchForm({
 }: SearchFormProps) {
   return (
     <form className="space-x-4 flex items-end justify-center">
-      <label className="flex flex-col">
-        Name
-        <input
-          className="border h-7 mt-1 indent-2"
-          type="text"
-          placeholder="Rick Sanchez..."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <label className="flex flex-col">
-        Gender
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className="border h-7 mt-1"
-        >
-          <option value="">Any Gender</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="genderless">Genderless</option>
-          <option value="unknown">Unknown</option>
-        </select>
-      </label>
-      <label className="flex flex-col">
-        Sort by
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          className="border h-7 mt-1"
-        >
-          <option value="">Initial</option>
-          <option value="name">Name</option>
-          <option value="created">Created Date</option>
-        </select>
-      </label>
+      <SearchFormTextInput
+        label="Name"
+        handleChange={setName}
+        value={name}
+        placeholder="Rick Sanchez.."
+      />
+      <SearchFormSelectInput
+        label={'Gender'}
+        handleChange={setGender}
+        value={gender}
+        options={[
+          { value: '', label: 'Any Gender' },
+          { value: 'female', label: 'Female' },
+          { value: 'male', label: 'Male' },
+          { value: 'genderless', label: 'Genderless' },
+          { value: 'unknown', label: 'Unknown' },
+        ]}
+      />
+      <SearchFormSelectInput
+        label={'Sort by'}
+        handleChange={setSortOption}
+        value={sortOption}
+        options={[
+          { value: '', label: 'Initial' },
+          { value: 'name', label: 'Name' },
+          { value: 'created', label: 'Created Date' },
+        ]}
+      />
     </form>
   );
 }
