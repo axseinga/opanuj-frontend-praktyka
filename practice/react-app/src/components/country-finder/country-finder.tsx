@@ -6,11 +6,16 @@ import { CountryFetchItemT } from '../../types';
 import { sortCountriesFn } from '../../utils';
 import { CountryCard } from '../country-card/country-card';
 
-export const CountryFinder = () => {
+type CountryFinderProps = {
+  searchResult: CountryFetchItemT[];
+  setSearchResult: (param: CountryFetchItemT[]) => void;
+};
+
+export const CountryFinder = ({
+  searchResult,
+  setSearchResult,
+}: CountryFinderProps) => {
   const [searchValue, setSearchValue] = React.useState('');
-  const [searchResult, setSearchResult] = React.useState<CountryFetchItemT[]>(
-    []
-  );
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
 
