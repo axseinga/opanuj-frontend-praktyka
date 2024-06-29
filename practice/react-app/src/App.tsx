@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import './App.scss';
+import { CountryFinder } from './components/country-finder/country-finder';
+import { ToggleAppMode } from './components/toggle/toggle';
+import { CountryCard } from './components/country-card/country-card';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [gameState, setGameState] = React.useState<boolean>(false);
+  const handleSubmit = () => {};
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app-wrapper">
+      <h1>GuessThatFlag</h1>
+      <ToggleAppMode setGameState={setGameState} />
+      <div className="toggle-area">
+        {!gameState ? (
+          <CountryFinder />
+        ) : (
+          <div>
+            <button>Draw a flag!</button>
+            <p>correct / incorrect</p>
+            {/* add placeholder when loading new one*/}
+            <CountryCard name="???" image={{ src: '', alt: '' }} displayDetails={!gameState}/>
+            <form onSubmit={handleSubmit}>
+              <input type="text" />
+              <button type="submit">Check my answer</button>
+            </form>
+          </div>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
