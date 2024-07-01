@@ -1,4 +1,9 @@
 .toggle-app-mode {
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto;
+  align-items: center;
+
   & label {
     position: relative;
     display: inline-block;
