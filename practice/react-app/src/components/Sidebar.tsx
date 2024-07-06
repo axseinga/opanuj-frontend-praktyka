@@ -14,8 +14,6 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
-  const { cart, clearCart, itemAmount, total } = useContext(CartContext);
-
   return (
     <div
       className={`${
@@ -23,9 +21,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
       } "w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] lg:w-[40vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]"`}
     >
       <div className="flex items-center justify-between py-6 border-b">
-        <div className="uppercase text-sm font-semibold">
-          Shopping Bag ({itemAmount})
-        </div>
+        <ShoppingBag />
         <div
           onClick={() => setIsSidebarOpen(false)}
           className="cursor-poniter w-8 h-8 flex justify-center items-center"
@@ -33,22 +29,11 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
           <IoMdClose className="text-2xl cursor-pointer" />
         </div>
       </div>
-      <div className="flex flex-col gap-y-2 h-[360px] md:h-[480px] lg:h-[420px] overflow-y-auto overflow-x-hidden border-b">
-        {cart.map((item) => {
-          return <CartItem item={item} key={item.id} />;
-        })}
-      </div>
+      <CartItems />
       <div className="flex flex-col gap-y-3  mt-4">
         <div className="flex w-full justify-between items-center">
-          <div className="font-semibold">
-            <span className="mr-2">Subtotal:</span> $ {total.toFixed(2)}
-          </div>
-          <div
-            onClick={clearCart}
-            className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
-          >
-            <FiTrash2 />
-          </div>
+          <Subtotal />
+          <ClearCartButton />
         </div>
         <Link
           to={'/'}
@@ -62,3 +47,47 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) => {
 };
 
 export default Sidebar;
+
+const ShoppingBag = () => {
+  const { itemAmount } = useContext(CartContext);
+
+  return (
+    <div className="uppercase text-sm font-semibold">
+      Shopping Bag ({itemAmount})
+    </div>
+  );
+};
+
+const Subtotal = () => {
+  const { total } = useContext(CartContext);
+  return (
+    <div className="font-semibold">
+      <span className="mr-2">Subtotal:</span> $ {total.toFixed(2)}
+    </div>
+  );
+};
+
+const CartItems = () => {
+  const { cart } = useContext(CartContext);
+
+  return (
+    <div className="flex flex-col gap-y-2 h-[360px] md:h-[480px] lg:h-[420px] overflow-y-auto overflow-x-hidden border-b">
+      {cart.map((item) => {
+        return <CartItem item={item} key={item.id} />;
+      })}
+    </div>
+  );
+};
+
+const ClearCartButton = () => {
+  const { clearCart } = useContext(CartContext);
+
+  return (
+    <div
+      onClick={clearCart}
+      className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
+    >
+      <FiTrash2 />
+    </div>
+  );
+};
