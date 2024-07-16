@@ -4,9 +4,11 @@
   import WeatherPreview from './WeatherPreview.svelte';
 
   let weather: LocationWeather;
+  let inputData: string = "";
 
   async function onLocationChange(event: KeyboardEvent) {
     const locationQuery = (event.target as HTMLInputElement).value;
+    inputData = locationQuery;
     try {
       const result = await fetchWeather(locationQuery);
       if (result) {
@@ -40,7 +42,11 @@
   </div>
   <div>
     {#if weather}
-      <WeatherPreview {weather} />
+    <WeatherPreview {weather} />
+    {:else if inputData !== "" && !weather}
+    <p>No weather found for the searched city</p>
+    {:else}
+      <p></p>
     {/if}
   </div>
 </main>
