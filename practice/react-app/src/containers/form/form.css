@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  max-width: 500px;
+
+  button {
+    align-self: flex-start;
+    color: black;
+    background-color: lightgreen;
+    border: 1px solid black;
+    padding: 10px 20px;
+  }
+}
