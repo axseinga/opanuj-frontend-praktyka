@@ -1,8 +1,4 @@
-export function formValidator(
-  firstName: string,
-  lastName: string,
-  age: number
-) {
+export function formValidator(firstName: string, lastName: string, age: any) {
   const errors: string[] = [];
 
   if (firstName.length < 1) {
@@ -11,6 +7,10 @@ export function formValidator(
 
   if (lastName.length < 1) {
     errors.push('Last name has to be at least 1 characters long');
+  }
+
+  if (isNaN(age)) {
+    throw new Error('Age must be a number');
   }
 
   if (age < 0) {
