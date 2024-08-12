@@ -16,4 +16,9 @@ describe('Form validation', () => {
         const errors = formValidator('John', 'Doe', -1);
         expect(errors).toContain('Age must be a positive number');
     });
+
+    test('should pass if all details are correct (first name and last name are not empty, age is a positive number)', () => {
+        const errors = formValidator('John', 'Doe', 30);
+        expect(errors).toHaveLength(0);
+    });
 });
