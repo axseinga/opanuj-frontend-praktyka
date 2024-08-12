@@ -2,14 +2,14 @@ import { describe, expect, test } from 'vitest';
 import { formValidator } from './validator';
 
 describe('Form validation', () => {
-    test('should return an error if first name is missing', () => {
+    test('should return an error if first name is less than 1 character long', () => {
         const errors = formValidator('', 'Doe', 30);
-        expect(errors).toContain('First name is required');
+        expect(errors).toContain('First name has to be at least 1 characters long');
     });
 
-    test('should return an error if last name is missing', () => {
+    test('should return an error if last name is less than 1 character long', () => {
         const errors = formValidator('John', '', 30);
-        expect(errors).toContain('Last name is required');
+        expect(errors).toContain('Last name has to be at least 1 characters long');
     });
 
     test('should return an error if age is negative', () => {
